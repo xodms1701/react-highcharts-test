@@ -10,38 +10,10 @@ function App() {
       zoomType: 'xy'
     },
     title: {
-      text: 'Temperature vs Rainfall'
+      text: 'Weekly Taking Medicine'
     },
     xAxis: [{
-      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    }],
-    yAxis: [{ // Primary yAxis
-      labels: {
-        format: '{value} °C',
-        style: {
-          color: Highcharts.getOptions().colors[1]
-        }
-      },
-      title: {
-        text: 'Temperature',
-        style: {
-          color: Highcharts.getOptions().colors[1]
-        }
-      }
-    }, { // Secondary yAxis
-      title: {
-        text: 'Rainfall',
-        style: {
-          color: Highcharts.getOptions().colors[0]
-        }
-      },
-      labels: {
-        format: '{value} mm',
-        style: {
-          color: Highcharts.getOptions().colors[0]
-        }
-      },
-      opposite: true
+      categories: ['Mon', 'Tue', 'Wed', 'Thr', 'Fri', 'Sat', 'Sun']
     }],
 
     tooltip: {
@@ -49,42 +21,101 @@ function App() {
     },
 
     series: [{
-      name: 'Rainfall',
+      name: '평균',
+      showInLegend: false,
       type: 'column',
-      yAxis: 1,
-      data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+      data: [2.8, 2.5, 3.5, 3.2, 2.8, 3.3, 2.9],
       tooltip: {
         pointFormat: '<span style="font-weight: bold; color: {series.color}">{series.name}</span>: <b>{point.y:.1f} mm</b> '
       }
     }, {
-      name: 'Rainfall error',
+      name: '표준편차',
       type: 'errorbar',
-      yAxis: 1,
-      data: [[48, 51], [68, 73], [92, 110], [128, 136], [140, 150], [171, 179], [135, 143], [142, 149], [204, 220], [189, 199], [95, 110], [52, 56]],
+      data: [[0.6, 5.0], [0.7, 4.3], [1.5, 5.5], [1.2, 5.2], [0.5, 5.1], [1.2, 5.4], [1.1, 4.7]],
       tooltip: {
-        pointFormat: '(error range: {point.low}-{point.high} mm)<br/>'
-      }
-    }, {
-      name: 'Temperature',
-      type: 'spline',
-      data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
-      tooltip: {
-        pointFormat: '<span style="font-weight: bold; color: {series.color}">{series.name}</span>: <b>{point.y:.1f}°C</b> '
-      }
-    }, {
-      name: 'Temperature error',
-      type: 'errorbar',
-      data: [[6, 8], [5.9, 7.6], [9.4, 10.4], [14.1, 15.9], [18.0, 20.1], [21.0, 24.0], [23.2, 25.3], [26.1, 27.8], [23.2, 23.9], [18.0, 21.1], [12.9, 14.0], [7.6, 10.0]],
-      tooltip: {
-        pointFormat: '(error range: {point.low}-{point.high}°C)<br/>'
+        pointFormat: '({series.name}: {point.low}-{point.high} mm)<br/>'
       }
     }]
   }
 
+  const options2 = {
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: 'Weekly Taking Medicine Each Person'
+    },
+    xAxis: {
+      categories: ['Mon', 'Tue', 'Wed', 'Thr', 'Fri', 'Sat', 'Sun'],
+      crosshair: true
+    },
+    tooltip: {
+      headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+      pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+        '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+      footerFormat: '</table>',
+      shared: true,
+      useHTML: true
+    },
+    plotOptions: {
+      column: {
+        pointPadding: 0.2,
+        borderWidth: 0
+      }
+    },
+    series: [{ name: '0', data: [2, 2, 0, 1, 3, 1, 1] },
+    { name: '1', data: [1, 2, 3, 1, 0, 1, 2] },
+    { name: '2', data: [2, 0, 0, 2, 2, 2, 1] },
+    { name: '3', data: [1, 1, 2, 2, 0, 1, 1] },
+    { name: '4', data: [2, 5, 1, 0, 2, 2, 3] },
+    { name: '5', data: [0, 0, 2, 3, 2, 1, 2] },
+    { name: '6', data: [2, 0, 2, 1, 1, 2, 0] },
+    { name: '7', data: [0, 0, 0, 0, 0, 0, 0] }]
+  };
+
+  const options3 = {
+    chart: {
+      zoomType: 'xy'
+    },
+    title: {
+      text: 'Weekly Walking Count'
+    },
+    xAxis: [{
+      categories: ['Mon', 'Tue', 'Wed', 'Thr', 'Fri', 'Sat', 'Sun']
+    }],
+    tooltip: {
+      shared: true
+    },
+
+    series: [{
+      name: '평균',
+      showInLegend: false,
+      type: 'column',
+      data: [4659, 3618, 5811, 6464, 3648, 4006, 4523],
+      tooltip: {
+        pointFormat: '<span style="font-weight: bold; color: {series.color}">{series.name}</span>: <b>{point.y:.1f} mm</b> '
+      },
+    }, {
+      name: '표준편차',
+      type: 'errorbar',
+      data: [[2402, 6916], [607, 6629], [4389, 7233], [3934, 8994], [494, 6082], [930, 7082], [1102, 7944]],
+      tooltip: {
+        pointFormat: '({series.name}: {point.low}-{point.high})<br/>'
+      }
+    }]
+  };
+
   return (
-    <div>
-      <HighchartsReact highcharts={Highcharts} options={options} />
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <div style={{ width: "50%" }}>
+        <HighchartsReact highcharts={Highcharts} options={options} />
+        <br />
+        <HighchartsReact highcharts={Highcharts} options={options2} />
+        <br />
+        <HighchartsReact highcharts={Highcharts} options={options3} />
+      </div>
     </div>
+
   );
 }
 
